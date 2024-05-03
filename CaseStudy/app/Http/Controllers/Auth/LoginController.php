@@ -17,15 +17,26 @@ class LoginController extends Controller
     // Handle the login request
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
 
-        // Check if the provided credentials match a predefined username and password
-        if ($credentials['email'] === 'admin' && $credentials['password'] === 'admin') {
-            // If credentials are valid, redirect to the dashboard
-            return redirect('/dashboard');
+         // Check if the provided credentials match the default ones
+        if ($request->email === 'admin@gmail.com' && $request->password === 'admin') {
+            // Authenticate the user manually
+            Auth::loginUsingId(1); // Change 1 to the ID of your default user
+            return redirect()->intended('/dashboard');
+        }
+        // Validate the form data
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        // Attempt to log the user in
+        if (Auth::attempt($credentials)) {
+            // Authentication passed...
+            return redirect()->intended('/dashboard');
         }
 
-        // If the credentials are invalid, redirect back with an error message
+        // If authentication fails, redirect back with an error message
         return back()->withErrors(['email' => 'Invalid credentials']);
     }
 
