@@ -13,6 +13,11 @@
     <div class="card" style="width: 30%; margin: 0 auto;">
         <div class="card-body">
             <h5 class="card-title text-center">Registration</h5>
+            
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+            
             <form id="registerForm" method="POST" action="{{ route('register') }}">
                 @csrf
 
