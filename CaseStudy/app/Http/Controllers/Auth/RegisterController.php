@@ -6,11 +6,17 @@ use Illuminate\Support\Facades\Redirect;
 
 class RegisterController extends Controller
 {
+<<<<<<< HEAD
     protected $registrationService;
 
     public function __construct(UserRegistrationService $registrationService)
     {
         $this->registrationService = $registrationService;
+=======
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+>>>>>>> 6ccde9bb39e06bd01611b23be00d99b9abcce500
     }
 
     public function register(Request $request)
