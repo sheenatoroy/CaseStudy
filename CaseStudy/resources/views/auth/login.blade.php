@@ -13,6 +13,8 @@
     <div class="card" style="width: 30%; margin: 0 auto;">
         <div class="card-body">
             <h5 class="card-title text-center">LOGIN</h5>
+
+            
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
